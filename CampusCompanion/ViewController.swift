@@ -21,6 +21,9 @@ class ViewController: UIViewController {
     @IBAction func getStartedButtonTapped(_ sender: UIButton) {
         subtitleLabel.text = "Let's get started!"
     }
+    @IBAction func exploreButtonTapped(_ sender: UIButton) {
+        performSegue(withIdentifier: "ShowDetailSegue", sender: self)
+    }
     
 }
 

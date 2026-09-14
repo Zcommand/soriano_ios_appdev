@@ -47,6 +47,9 @@
                                 <rect key="frame" x="122.66666666666669" y="570.66666666666663" width="148" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Explore Campus"/>
+                                <connections>
+                                    <action selector="exploreButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VMV-Qa-btH"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -70,11 +73,40 @@
                     <connections>
                         <outlet property="subtitleLabel" destination="vq5-6F-kdg" id="ma3-SS-ruN"/>
                         <outlet property="titleLabel" destination="HBc-jT-KJR" id="hxG-Vs-awC"/>
+                        <segue destination="IW7-R5-ybh" kind="show" identifier="ShowDetailSegue" id="86v-pR-h7j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="794.6564885496183" y="137.32394366197184"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="ZLQ-or-KU9">
+            <objects>
+                <viewController id="IW7-R5-ybh" customClass="DetailViewController" customModule="CampusCompanion" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WNH-DT-dWr">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Campus Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kFv-qI-d4K">
+                                <rect key="frame" x="137" y="467.66666666666669" width="119" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="7n3-a7-aUP"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="kFv-qI-d4K" firstAttribute="centerX" secondItem="7n3-a7-aUP" secondAttribute="centerX" id="n54-zf-qL7"/>
+                            <constraint firstItem="kFv-qI-d4K" firstAttribute="centerY" secondItem="7n3-a7-aUP" secondAttribute="centerY" id="y94-Q1-zH7"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="uhp-xu-G6W"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h3Y-qk-GFi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1713" y="145"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hq9-9b-daP">
