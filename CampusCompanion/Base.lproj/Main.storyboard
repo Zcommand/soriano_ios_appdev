@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24765" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24765" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xaw-ua-Rct">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24743"/>
@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Campus Companion-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="CampusCompanion" customModuleProvider="target" sceneMemberID="viewController">
@@ -17,31 +17,36 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Campus Companion" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HBc-jT-KJR">
-                                <rect key="frame" x="20" y="178" width="353" height="36.666666666666657"/>
+                                <rect key="frame" x="20" y="232" width="353" height="36.666666666666686"/>
                                 <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="28"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Campus, In Your Pocket" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vq5-6F-kdg">
-                                <rect key="frame" x="20" y="222.66666666666666" width="353" height="21"/>
+                                <rect key="frame" x="20" y="276.66666666666669" width="353" height="21"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AfW-Re-DVg">
-                                <rect key="frame" x="121.66666666666669" y="283.66666666666669" width="150" height="150"/>
+                                <rect key="frame" x="121.66666666666669" y="337.66666666666669" width="150" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="08h-mO-ITF"/>
                                     <constraint firstAttribute="width" constant="150" id="eRh-Ps-fK7"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Th8-Li-k6T">
-                                <rect key="frame" x="140.66666666666666" y="457.66666666666669" width="112" height="35"/>
+                                <rect key="frame" x="140.66666666666666" y="511.66666666666674" width="112" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Get Started"/>
                                 <connections>
                                     <action selector="getStartedButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ick-nR-vQr"/>
                                 </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="guJ-Qz-ktD">
+                                <rect key="frame" x="122.66666666666669" y="570.66666666666663" width="148" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Explore Campus"/>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -52,19 +57,40 @@
                             <constraint firstItem="vq5-6F-kdg" firstAttribute="top" secondItem="HBc-jT-KJR" secondAttribute="bottom" constant="8" id="9Nr-zh-VqO"/>
                             <constraint firstItem="HBc-jT-KJR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="FLs-Jl-E91"/>
                             <constraint firstItem="HBc-jT-KJR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="60" id="Ftk-Nd-Agd"/>
+                            <constraint firstItem="AfW-Re-DVg" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="WXb-Wq-htd"/>
+                            <constraint firstItem="guJ-Qz-ktD" firstAttribute="top" secondItem="Th8-Li-k6T" secondAttribute="bottom" constant="24" id="e8c-XQ-o4Z"/>
+                            <constraint firstItem="guJ-Qz-ktD" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="hBD-aC-epm"/>
                             <constraint firstItem="AfW-Re-DVg" firstAttribute="top" secondItem="vq5-6F-kdg" secondAttribute="bottom" constant="40" id="kPP-CG-nP9"/>
-                            <constraint firstItem="AfW-Re-DVg" firstAttribute="centerX" secondItem="vq5-6F-kdg" secondAttribute="centerX" id="nFR-to-4j1"/>
                             <constraint firstItem="vq5-6F-kdg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="pm4-T2-gLH"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="HBc-jT-KJR" secondAttribute="trailing" constant="20" id="qZ2-OU-vRs"/>
                             <constraint firstItem="Th8-Li-k6T" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="shQ-uX-vVP"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Campus Companion" id="uza-Jm-Phd"/>
                     <connections>
                         <outlet property="subtitleLabel" destination="vq5-6F-kdg" id="ma3-SS-ruN"/>
                         <outlet property="titleLabel" destination="HBc-jT-KJR" id="hxG-Vs-awC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="794.6564885496183" y="137.32394366197184"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="hq9-9b-daP">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xaw-ua-Rct" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DRy-Zd-y4A">
+                        <rect key="frame" x="0.0" y="118" width="393" height="54"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="fp6-Vw-ieK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8nX-lH-dYO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-132.06106870229007" y="137.32394366197184"/>
         </scene>
