@@ -44,33 +44,68 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="guJ-Qz-ktD">
-                                <rect key="frame" x="122.66666666666669" y="570.66666666666663" width="148" height="35"/>
+                                <rect key="frame" x="122.66666666666669" y="711.66666666666663" width="148" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="tinted" title="Explore Campus"/>
                                 <connections>
                                     <action selector="exploreButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VMV-Qa-btH"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter your name" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m9Q-1s-CPA">
+                                <rect key="frame" x="32" y="570.66666666666663" width="329" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notify me about events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M6H-af-anQ">
+                                <rect key="frame" x="32" y="620.66666666666663" width="177" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VkW-DT-hTN">
+                                <rect key="frame" x="300" y="620.66666666666663" width="63" height="28"/>
+                            </switch>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="z6N-lR-8al">
+                                <rect key="frame" x="32" y="664.66666666666663" width="329" height="32"/>
+                                <segments>
+                                    <segment title="Student"/>
+                                    <segment title="Faculty"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="guJ-Qz-ktD" firstAttribute="top" secondItem="z6N-lR-8al" secondAttribute="bottom" constant="16" id="1Nt-vi-F6m"/>
                             <constraint firstItem="Th8-Li-k6T" firstAttribute="top" secondItem="AfW-Re-DVg" secondAttribute="bottom" constant="24" id="1jB-h1-937"/>
+                            <constraint firstItem="M6H-af-anQ" firstAttribute="top" secondItem="m9Q-1s-CPA" secondAttribute="bottom" constant="16" id="3aO-FW-5Og"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vq5-6F-kdg" secondAttribute="trailing" constant="20" id="8Ee-B9-4dd"/>
                             <constraint firstItem="vq5-6F-kdg" firstAttribute="top" secondItem="HBc-jT-KJR" secondAttribute="bottom" constant="8" id="9Nr-zh-VqO"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="z6N-lR-8al" secondAttribute="trailing" constant="32" id="EEp-Cs-dfP"/>
                             <constraint firstItem="HBc-jT-KJR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="FLs-Jl-E91"/>
                             <constraint firstItem="HBc-jT-KJR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="60" id="Ftk-Nd-Agd"/>
+                            <constraint firstItem="m9Q-1s-CPA" firstAttribute="top" secondItem="Th8-Li-k6T" secondAttribute="bottom" constant="24" id="M2f-gN-iQv"/>
                             <constraint firstItem="AfW-Re-DVg" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="WXb-Wq-htd"/>
-                            <constraint firstItem="guJ-Qz-ktD" firstAttribute="top" secondItem="Th8-Li-k6T" secondAttribute="bottom" constant="24" id="e8c-XQ-o4Z"/>
+                            <constraint firstItem="z6N-lR-8al" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="Wgm-Tw-O0q"/>
+                            <constraint firstItem="VkW-DT-hTN" firstAttribute="leading" secondItem="M6H-af-anQ" secondAttribute="trailing" constant="91" id="aEt-6y-pGV"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="VkW-DT-hTN" secondAttribute="trailing" constant="32" id="c6J-MT-4OT"/>
+                            <constraint firstItem="m9Q-1s-CPA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="fFT-dS-dSh"/>
                             <constraint firstItem="guJ-Qz-ktD" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="hBD-aC-epm"/>
                             <constraint firstItem="AfW-Re-DVg" firstAttribute="top" secondItem="vq5-6F-kdg" secondAttribute="bottom" constant="40" id="kPP-CG-nP9"/>
+                            <constraint firstItem="VkW-DT-hTN" firstAttribute="top" secondItem="m9Q-1s-CPA" secondAttribute="bottom" constant="16" id="lZn-vP-dzf"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="m9Q-1s-CPA" secondAttribute="trailing" constant="32" id="m5c-ud-7mW"/>
                             <constraint firstItem="vq5-6F-kdg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="pm4-T2-gLH"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="HBc-jT-KJR" secondAttribute="trailing" constant="20" id="qZ2-OU-vRs"/>
                             <constraint firstItem="Th8-Li-k6T" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="shQ-uX-vVP"/>
+                            <constraint firstItem="z6N-lR-8al" firstAttribute="top" secondItem="VkW-DT-hTN" secondAttribute="bottom" constant="16" id="vh2-Vr-pgE"/>
+                            <constraint firstItem="M6H-af-anQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="wGF-KU-kf7"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Campus Companion" id="uza-Jm-Phd"/>
                     <connections>
+                        <outlet property="nameTextField" destination="m9Q-1s-CPA" id="Q8f-0d-PfU"/>
+                        <outlet property="notifySwitch" destination="VkW-DT-hTN" id="9DB-ug-UKn"/>
+                        <outlet property="roleSegmentedControl" destination="z6N-lR-8al" id="g6C-Ky-Xec"/>
                         <outlet property="subtitleLabel" destination="vq5-6F-kdg" id="ma3-SS-ruN"/>
                         <outlet property="titleLabel" destination="HBc-jT-KJR" id="hxG-Vs-awC"/>
                         <segue destination="IW7-R5-ybh" kind="show" identifier="ShowDetailSegue" id="86v-pR-h7j"/>
@@ -103,10 +138,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="uhp-xu-G6W"/>
+                    <connections>
+                        <outlet property="messageLabel" destination="kFv-qI-d4K" id="6r9-CS-f8W"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h3Y-qk-GFi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1713" y="145"/>
+            <point key="canvasLocation" x="1712.2137404580153" y="144.36619718309859"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hq9-9b-daP">
