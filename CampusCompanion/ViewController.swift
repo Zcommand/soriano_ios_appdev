@@ -14,10 +14,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var notifySwitch: UISwitch!
     @IBOutlet weak var roleSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var eventDatePicker: UIDatePicker!
+    @IBOutlet weak var guestStepper: UIStepper!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         titleLabel.text = "Campus Companion"
+        eventDatePicker.date = Date()
         // Do any additional setup after loading the view.
     }
 
@@ -42,7 +46,8 @@ class ViewController: UIViewController {
         destination.notificationsEnabled = notifySwitch.isOn
         destination.selectedRole = roleSegmentedControl.selectedSegmentIndex == 0
             ? "Student" : "Faculty"
+        destination.eventDate = eventDatePicker.date
+        destination.numberOfGuests = max(1, Int(guestStepper.value))
     }
     
 }
-
