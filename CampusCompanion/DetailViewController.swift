@@ -9,6 +9,7 @@ import UIKit
 
 class DetailViewController: UIViewController {
     @IBOutlet weak var messageLabel: UILabel!
+    var announcement: CampusAnnouncement?
     var studentName: String = ""
     var notificationsEnabled: Bool = false
     var selectedRole: String = ""
@@ -17,6 +18,21 @@ class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        messageLabel.numberOfLines = 0
+        messageLabel.textAlignment = .center
+
+        if let announcement = announcement {
+            title = announcement.category
+            messageLabel.text = """
+            \(announcement.title)
+            \(announcement.date)
+
+            Priority: \(announcement.priority)
+            Posted by: \(announcement.postedBy)
+            """
+            return
+        }
+
         title = "Campus Events"
         
         let dateFormatter = DateFormatter()
@@ -26,8 +42,6 @@ class DetailViewController: UIViewController {
         let notificationStatus = notificationsEnabled ? "on" : "off"
         let formattedEventDate = dateFormatter.string(from: eventDate)
 
-        messageLabel.numberOfLines = 0
-        messageLabel.textAlignment = .center
         messageLabel.text = """
         Welcome, \(studentName)! (\(selectedRole))
         Notifications: \(notificationStatus).
