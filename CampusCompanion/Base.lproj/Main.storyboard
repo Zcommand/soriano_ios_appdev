@@ -59,6 +59,14 @@
                                     <segue destination="ANN-VC-001" kind="show" id="SEG-WEL-ANN"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RST-BTN-001">
+                                <rect key="frame" x="115" y="722.33333333333337" width="163" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Reset Preferences"/>
+                                <connections>
+                                    <action selector="resetPreferencesTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RST-ACT-001"/>
+                                </connections>
+                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m9Q-1s-CPA">
                                 <rect key="frame" x="32" y="439" width="329" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -112,6 +120,8 @@
                             <constraint firstItem="vq5-6F-kdg" firstAttribute="top" secondItem="HBc-jT-KJR" secondAttribute="bottom" constant="8" id="9Nr-zh-VqO"/>
                             <constraint firstItem="Hgh-WV-ZUP" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="ANN-BTN-CX"/>
                             <constraint firstItem="Hgh-WV-ZUP" firstAttribute="top" secondItem="guJ-Qz-ktD" secondAttribute="bottom" constant="8" id="ANN-BTN-TOP"/>
+                            <constraint firstItem="RST-BTN-001" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="RST-BTN-CX"/>
+                            <constraint firstItem="RST-BTN-001" firstAttribute="top" secondItem="Hgh-WV-ZUP" secondAttribute="bottom" constant="8" id="RST-BTN-TOP"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="z6N-lR-8al" secondAttribute="trailing" constant="32" id="EEp-Cs-dfP"/>
                             <constraint firstItem="HBc-jT-KJR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="FLs-Jl-E91"/>
                             <constraint firstItem="HBc-jT-KJR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="18" id="Ftk-Nd-Agd"/>
@@ -217,7 +227,13 @@
                             <outlet property="delegate" destination="ANN-VC-001" id="ANN-TV-DL"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Campus Announcements" id="ANN-NAV-001"/>
+                    <navigationItem key="navigationItem" title="Campus Announcements" id="ANN-NAV-001">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ANN-ADD-001">
+                            <connections>
+                                <action selector="addAnnouncementTapped:" destination="ANN-VC-001" id="ANN-ADD-ACTION"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="IW7-R5-ybh" kind="show" identifier="ShowAnnouncementDetailSegue" id="SEG-ANN-DET"/>
                     </connections>

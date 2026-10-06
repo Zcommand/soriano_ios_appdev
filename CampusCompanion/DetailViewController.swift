@@ -24,11 +24,8 @@ class DetailViewController: UIViewController {
         if let announcement = announcement {
             title = announcement.category
             messageLabel.text = """
-            \(announcement.title)
-            \(announcement.date)
-
-            Priority: \(announcement.priority)
-            Posted by: \(announcement.postedBy)
+            \(announcement.title ?? "")
+            \(announcement.date ?? "")
             """
             return
         }

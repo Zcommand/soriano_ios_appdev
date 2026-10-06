@@ -6,14 +6,84 @@
 //
 
 import UIKit
+import CoreData
 
 class AnnouncementsViewController: UITableViewController {
-    private let announcements = CampusAnnouncement.sampleAnnouncements
+    private var announcements: [CampusAnnouncement] = []
     private var selectedAnnouncement: CampusAnnouncement?
+    private var context: NSManagedObjectContext {
+        (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Campus Announcements"
+        seedInitialAnnouncementsIfNeeded()
+        loadAnnouncements()
+    }
+
+    private func seedInitialAnnouncementsIfNeeded() {
+        let request: NSFetchRequest<CampusAnnouncement> = CampusAnnouncement.fetchRequest()
+        let existingCount = (try? context.count(for: request)) ?? 0
+        guard existingCount == 0 else { return }
+
+        let seedAnnouncements = [
+            ("Enrollment Period Extended", "August 3, 2026", "Registrar"),
+            ("Classes Suspended Due to Flooding", "September 30, 2026", "Weather Update"),
+            ("Transport Strike Advisory", "October 1, 2026", "Campus Advisory"),
+            ("Library Hours Extended", "October 4, 2026", "Library"),
+            ("Student Org Fair", "October 7, 2026", "Student Life"),
+            ("Scholarship Deadline Reminder", "October 11, 2026", "Financial Aid")
+        ]
+
+        for seed in seedAnnouncements {
+            let announcement = CampusAnnouncement(context: context)
+            announcement.title = seed.0
+            announcement.date = seed.1
+            announcement.category = seed.2
+        }
+
+        try? context.save()
+    }
+
+    private func loadAnnouncements() {
+        let request: NSFetchRequest<CampusAnnouncement> = CampusAnnouncement.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+        announcements = (try? context.fetch(request)) ?? []
+        tableView.reloadData()
+    }
+
+    @IBAction func addAnnouncementTapped(_ sender: UIBarButtonItem) {
+        let alert = UIAlertController(title: "New Announcement",
+                                      message: "Enter a title and category.",
+                                      preferredStyle: .alert)
+        alert.addTextField { textField in
+            textField.placeholder = "Title"
+        }
+        alert.addTextField { textField in
+            textField.placeholder = "Category"
+        }
+
+        let saveAction = UIAlertAction(title: "Save", style: .default) { [weak self, weak alert] _ in
+            guard let self = self,
+                  let titleText = alert?.textFields?[0].text, !titleText.isEmpty,
+                  let categoryText = alert?.textFields?[1].text, !categoryText.isEmpty else {
+                return
+            }
+
+            let newAnnouncement = CampusAnnouncement(context: self.context)
+            newAnnouncement.title = titleText
+            newAnnouncement.date = DateFormatter.localizedString(from: Date(),
+                                                                 dateStyle: .long,
+                                                                 timeStyle: .none)
+            newAnnouncement.category = categoryText
+            try? self.context.save()
+            self.loadAnnouncements()
+        }
+
+        alert.addAction(saveAction)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(alert, animated: true)
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -36,6 +106,18 @@ class AnnouncementsViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         selectedAnnouncement = announcements[indexPath.row]
         performSegue(withIdentifier: "ShowAnnouncementDetailSegue", sender: self)
+    }
+
+    override func tableView(_ tableView: UITableView,
+                            commit editingStyle: UITableViewCell.EditingStyle,
+                            forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let announcement = announcements[indexPath.row]
+            context.delete(announcement)
+            try? context.save()
+            announcements.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
