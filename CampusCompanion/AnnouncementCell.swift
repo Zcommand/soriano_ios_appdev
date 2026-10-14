@@ -14,7 +14,12 @@ class AnnouncementCell: UITableViewCell {
 
     func configure(with announcement: CampusAnnouncement) {
         titleLabel.text = announcement.title ?? ""
-        dateLabel.text = "\(announcement.category ?? "") • \(announcement.date ?? "")"
+        let details = "\(announcement.category ?? "") • \(announcement.date ?? "")"
+        let location = announcement.location ?? ""
+        let priority = announcement.priorityLevel ?? ""
+        dateLabel.text = location.isEmpty && priority.isEmpty
+            ? details
+            : "\(details)\n\(location) • \(priority)"
         categoryIconImageView.image = UIImage(systemName: "megaphone.fill")
         categoryIconImageView.tintColor = .systemBlue
         titleLabel.textColor = .label

@@ -172,20 +172,20 @@
         <scene sceneID="ANN-SCENE-001">
             <objects>
                 <tableViewController id="ANN-VC-001" customClass="AnnouncementsViewController" customModule="CampusCompanion" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="76" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" id="ANN-TV-001">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="96" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" id="ANN-TV-001">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AnnouncementCell" rowHeight="76" id="ANN-CELL-1" customClass="AnnouncementCell" customModule="CampusCompanion" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="50" width="393" height="76"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AnnouncementCell" rowHeight="96" id="ANN-CELL-1" customClass="AnnouncementCell" customModule="CampusCompanion" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="50" width="393" height="96"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ANN-CELL-1" id="ANN-CONTENT-1">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="76"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="96"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ANN-ICON-1">
-                                            <rect key="frame" x="16" y="22" width="32" height="32"/>
+                                            <rect key="frame" x="16" y="32" width="32" height="32"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="32" id="ANN-ICON-H"/>
                                                 <constraint firstAttribute="width" constant="32" id="ANN-ICON-W"/>
@@ -197,8 +197,8 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category • Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ANN-DATE-1">
-                                            <rect key="frame" x="64" y="40.333333333333336" width="313" height="18"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category • Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" numberOfLines="2" translatesAutoresizingMaskIntoConstraints="NO" id="ANN-DATE-1">
+                                            <rect key="frame" x="64" y="40.333333333333336" width="313" height="36"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" systemColor="secondaryLabelColor"/>
                                             <nil key="highlightedColor"/>
@@ -228,11 +228,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Campus Announcements" id="ANN-NAV-001">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ANN-ADD-001">
-                            <connections>
-                                <action selector="addAnnouncementTapped:" destination="ANN-VC-001" id="ANN-ADD-ACTION"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="refresh" id="ANN-REFRESH-001">
+                                <connections>
+                                    <action selector="refreshTapped:" destination="ANN-VC-001" id="ANN-REFRESH-ACTION"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="add" id="ANN-ADD-001">
+                                <connections>
+                                    <action selector="addAnnouncementTapped:" destination="ANN-VC-001" id="ANN-ADD-ACTION"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <segue destination="IW7-R5-ybh" kind="show" identifier="ShowAnnouncementDetailSegue" id="SEG-ANN-DET"/>

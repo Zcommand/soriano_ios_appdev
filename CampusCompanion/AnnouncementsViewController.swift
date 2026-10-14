@@ -8,6 +8,12 @@
 import UIKit
 import CoreData
 
+private enum RemoteEndpoint {
+    // Temporary test feed while the module's shared endpoint returns 404.
+    static let announcements = URL(string: "https://raw.githubusercontent.com/Zcommand/" +
+                                   "soriano_ios_appdev/main/CampusCompanion/announcements-test.json")!
+}
+
 class AnnouncementsViewController: UITableViewController {
     private var announcements: [CampusAnnouncement] = []
     private var selectedAnnouncement: CampusAnnouncement?
@@ -53,6 +59,71 @@ class AnnouncementsViewController: UITableViewController {
         tableView.reloadData()
     }
 
+    @IBAction func refreshTapped(_ sender: UIBarButtonItem) {
+        fetchAnnouncementsFromServer()
+    }
+
+    private func fetchAnnouncementsFromServer() {
+        let task = URLSession.shared.dataTask(with: RemoteEndpoint.announcements) { [weak self] data, response, error in
+            if let error = error {
+                print("Network error: \(error.localizedDescription)")
+                return
+            }
+
+            guard let response = response as? HTTPURLResponse,
+                  (200...299).contains(response.statusCode) else {
+                print("Unexpected server response.")
+                return
+            }
+
+            guard let data = data else { return }
+            print("Reached network handler with \(data.count) bytes.")
+            if let jsonText = String(data: data, encoding: .utf8) {
+                print(jsonText)
+            }
+
+            do {
+                let decodedAnnouncements = try JSONDecoder().decode([AnnouncementDTO].self, from: data)
+                DispatchQueue.main.async {
+                    guard let self = self else { return }
+                    self.replaceAnnouncements(with: decodedAnnouncements)
+                    self.showNetworkConfirmationAlert(byteCount: data.count)
+                }
+            } catch {
+                print("Decoding error: \(error)")
+            }
+        }
+        task.resume()
+    }
+
+    private func replaceAnnouncements(with dtos: [AnnouncementDTO]) {
+        let request: NSFetchRequest<CampusAnnouncement> = CampusAnnouncement.fetchRequest()
+        let existing = (try? context.fetch(request)) ?? []
+        for item in existing {
+            context.delete(item)
+        }
+
+        for dto in dtos {
+            let announcement = CampusAnnouncement(context: context)
+            announcement.title = dto.title
+            announcement.date = dto.date
+            announcement.category = dto.category
+            announcement.location = dto.location
+            announcement.priorityLevel = dto.priorityLevel
+        }
+
+        try? context.save()
+        loadAnnouncements()
+    }
+
+    private func showNetworkConfirmationAlert(byteCount: Int) {
+        let alert = UIAlertController(title: "Server Reached",
+                                      message: "Received \(byteCount) bytes from the announcements endpoint.",
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+
     @IBAction func addAnnouncementTapped(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "New Announcement",
                                       message: "Enter a title and category.",
@@ -77,6 +148,8 @@ class AnnouncementsViewController: UITableViewController {
                                                                  dateStyle: .long,
                                                                  timeStyle: .none)
             newAnnouncement.category = categoryText
+            newAnnouncement.location = ""
+            newAnnouncement.priorityLevel = ""
             try? self.context.save()
             self.loadAnnouncements()
         }
