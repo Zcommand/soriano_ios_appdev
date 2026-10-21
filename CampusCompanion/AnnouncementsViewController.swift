@@ -9,9 +9,8 @@ import UIKit
 import CoreData
 
 private enum RemoteEndpoint {
-    // Temporary test feed while the module's shared endpoint returns 404.
-    static let announcements = URL(string: "https://raw.githubusercontent.com/Zcommand/" +
-                                   "soriano_ios_appdev/main/CampusCompanion/announcements-test.json")!
+    static let announcements = URL(string: "https://raw.githubusercontent.com/vohn-dev/" +
+                                   "campus-companion-api/refs/heads/main/announcements.json")!
 }
 
 class AnnouncementsViewController: UITableViewController {
@@ -108,8 +107,8 @@ class AnnouncementsViewController: UITableViewController {
             announcement.title = dto.title
             announcement.date = dto.date
             announcement.category = dto.category
-            announcement.location = dto.location
-            announcement.priorityLevel = dto.priorityLevel
+            announcement.location = dto.location ?? "Not provided"
+            announcement.priorityLevel = dto.priorityLevel ?? "Not provided"
         }
 
         try? context.save()

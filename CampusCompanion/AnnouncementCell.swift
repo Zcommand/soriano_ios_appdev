@@ -14,12 +14,9 @@ class AnnouncementCell: UITableViewCell {
 
     func configure(with announcement: CampusAnnouncement) {
         titleLabel.text = announcement.title ?? ""
-        let details = "\(announcement.category ?? "") • \(announcement.date ?? "")"
-        let location = announcement.location ?? ""
-        let priority = announcement.priorityLevel ?? ""
-        dateLabel.text = location.isEmpty && priority.isEmpty
-            ? details
-            : "\(details)\n\(location) • \(priority)"
+        let location = announcement.location.flatMap { $0.isEmpty ? nil : $0 } ?? "Not provided"
+        let priority = announcement.priorityLevel.flatMap { $0.isEmpty ? nil : $0 } ?? "Not provided"
+        dateLabel.text = "\(announcement.category ?? "") • \(announcement.date ?? "")\nLocation: \(location)\nPriority: \(priority)"
         categoryIconImageView.image = UIImage(systemName: "megaphone.fill")
         categoryIconImageView.tintColor = .systemBlue
         titleLabel.textColor = .label
