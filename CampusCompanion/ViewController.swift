@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PhotosUI
 
 private enum DefaultsKey {
     static let studentName = "studentName"
@@ -13,7 +14,7 @@ private enum DefaultsKey {
     static let selectedRoleIndex = "selectedRoleIndex"
 }
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, PHPickerViewControllerDelegate {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
@@ -22,6 +23,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var roleSegmentedControl: UISegmentedControl!
     @IBOutlet weak var eventDatePicker: UIDatePicker!
     @IBOutlet weak var guestStepper: UIStepper!
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var removePhotoButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +35,73 @@ class ViewController: UIViewController {
         notifySwitch.isOn = UserDefaults.standard.bool(forKey: DefaultsKey.notificationsEnabled)
         roleSegmentedControl.selectedSegmentIndex =
             UserDefaults.standard.integer(forKey: DefaultsKey.selectedRoleIndex)
+        profileImageView.layer.cornerRadius = 0
+        loadProfileImageFromDisk()
         // Do any additional setup after loading the view.
+    }
+
+    @IBAction func changePhotoTapped(_ sender: UIButton) {
+        var configuration = PHPickerConfiguration()
+        configuration.filter = .images
+        configuration.selectionLimit = 1
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        present(picker, animated: true)
+    }
+
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
+        guard let result = results.first else { return }
+
+        result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] object, _ in
+            guard let image = object as? UIImage else { return }
+            DispatchQueue.main.async {
+                self?.profileImageView.contentMode = .scaleAspectFill
+                self?.profileImageView.image = image
+                self?.saveProfileImageToDisk(image)
+            }
+        }
+    }
+
+    private func saveProfileImageToDisk(_ image: UIImage) {
+        guard let data = image.jpegData(compressionQuality: 0.8),
+              let documentsURL = FileManager.default.urls(
+                for: .documentDirectory, in: .userDomainMask).first else { return }
+        let fileURL = documentsURL.appendingPathComponent("profilePhoto.jpg")
+        do {
+            try data.write(to: fileURL)
+            removePhotoButton.isEnabled = true
+        } catch {
+            print("Could not save profile photo: \(error.localizedDescription)")
+        }
+    }
+
+    private func loadProfileImageFromDisk() {
+        guard let documentsURL = FileManager.default.urls(
+            for: .documentDirectory, in: .userDomainMask).first else { return }
+        let fileURL = documentsURL.appendingPathComponent("profilePhoto.jpg")
+        if let image = UIImage(contentsOfFile: fileURL.path) {
+            profileImageView.contentMode = .scaleAspectFill
+            profileImageView.image = image
+            removePhotoButton.isEnabled = true
+        } else {
+            profileImageView.contentMode = .scaleAspectFit
+            removePhotoButton.isEnabled = false
+        }
+    }
+
+    @IBAction func removePhotoTapped(_ sender: UIButton) {
+        guard let documentsURL = FileManager.default.urls(
+            for: .documentDirectory, in: .userDomainMask).first else { return }
+        let fileURL = documentsURL.appendingPathComponent("profilePhoto.jpg")
+        do {
+            try FileManager.default.removeItem(at: fileURL)
+            profileImageView.contentMode = .scaleAspectFit
+            profileImageView.image = UIImage(systemName: "person.crop.circle")
+            removePhotoButton.isEnabled = false
+        } catch {
+            print("Could not remove profile photo: \(error.localizedDescription)")
+        }
     }
 
     @IBAction func getStartedButtonTapped(_ sender: UIButton) {
